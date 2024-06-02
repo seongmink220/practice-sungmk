@@ -1,19 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from "react-dom/client";
+import App from "./App";
+// import { ThemeProvider } from "styled-components";
+// import { LIGHT_MODE_THEME } from "@src/@styles/theme";
+// import GlobalStyle from "./@styles/GlobalStyle";
+import { QueryClientProvider, QueryClient } from "react-query";
+import { BrowserRouter } from "react-router-dom";
+// if (process.env.NODE_ENV === "development") {
+//     // eslint-disable-next-line @typescript-eslint/no-var-requires
+//     const { worker } = require("./mocks/browser");
+//     worker.start();
+// }
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false,
+        },
+    },
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root") as Element);
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+            {/*<ThemeProvider theme={LIGHT_MODE_THEME}>*/}
+            {/*    <GlobalStyle />*/}
+                <App />
+            {/*</ThemeProvider>*/}
+        </QueryClientProvider>
+    </BrowserRouter>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

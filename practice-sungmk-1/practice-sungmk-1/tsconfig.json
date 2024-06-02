@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES6",
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
+      "ES6"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -13,14 +14,19 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": [
-    "src"
+  "paths": {
+    "@src/*": ["src/*"],
+    "@public/*": ["public/*"]
+  },
+  "include": ["src",
+    "public",
+    "src/@types/custom.d.ts"
   ]
 }
