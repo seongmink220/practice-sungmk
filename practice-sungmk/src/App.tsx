@@ -1,21 +1,9 @@
-import React from "react";
-
+import { useRoutes } from "react-router-dom";
+import routes from "./Routes";
 
 function App() {
-    return (
-        <section className="todoapp">
-
-            {/*<BrowserRouter>*/}
-            {/*    <Routes>*/}
-            {/*        <Route path="/" element={<DashBoardMain />}></Route>*/}
-            {/*    </Routes>*/}
-            {/*    <Routes>*/}
-            {/*        <Route path="/terminal" element={<TerminalMain/>}></Route>*/}
-            {/*    </Routes>*/}
-            {/*</BrowserRouter>*/}
-
-        </section>
-    )
+    const element = useRoutes(routes);
+    return <>{element}</>;
 }
 
-export default App
+export default App;
