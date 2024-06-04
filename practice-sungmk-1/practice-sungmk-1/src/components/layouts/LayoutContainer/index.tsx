@@ -1,9 +1,11 @@
 import Header from "../../../../src/components/layouts/Header";
 import Footer from "../../../../src/components/layouts/Footer";
-// import * as Styled from "./style";
+import * as Styled from "./style";
 // import Navigation from "../Navigation";
-import { useLocation } from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {StrictPropsWithChildren} from "../../../../src/@types/utils";
+import routes from '../../../Routes';
+import {PATH_NAME} from "../../../../src/@constants/path";
 
 function LayoutContainer({ children }: StrictPropsWithChildren) {
 // function LayoutContainer() {
@@ -11,21 +13,29 @@ function LayoutContainer({ children }: StrictPropsWithChildren) {
 
   const hasHeader = () => pathname === "/" || pathname === "/addChannel";
 
-  return (
-      <section>
-          <Header />
+    console.log("PATH_NAME.TERMINAL==" + PATH_NAME.TERMINAL);
 
-          <Footer />
-      </section>
-    // <Styled.Container>
-    //   {hasHeader() && <Header />}
-    //   <Styled.Main hasMarginTop={hasHeader()}>
+  return (
+      <Styled.Container>
+          <section>
+              <Header />
+              {hasHeader() && <div>DefaultLayOut View</div>}
+              {children && children}
+              <Link to={routes.find(route => route.path === PATH_NAME.TERMINAL)?.path || '/'}>Terminal</Link>
+              <Footer/>
+          </section>
+      </Styled.Container>
+
+      // <Styled.Container>
+      //   {hasHeader() && <Header />}
+      //   <Styled.Main hasMarginTop={hasHeader()}>
     //     {children && children}
     //   </Styled.Main>
     //   <Footer />
     //   <Navigation />
     // </Styled.Container>
   );
+
 }
 
 export default LayoutContainer;

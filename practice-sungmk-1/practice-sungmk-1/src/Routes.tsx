@@ -8,6 +8,8 @@
 //
 // import LayoutContainer from "src/components/layouts/LayoutContainer";
 import LayoutContainer from "../src/components/layouts/LayoutContainer";
+import Terminal from "../src/pages/terminal/index";
+import {PATH_NAME} from "../src/@constants/path";
 
 const routes = [
       {
@@ -18,6 +20,15 @@ const routes = [
             </LayoutContainer>
         ),
       },
+      {
+        path: PATH_NAME.TERMINAL,
+        element: (
+            <LayoutContainer>
+                <Terminal />
+            </LayoutContainer>
+        ),
+      },
+
       // {
       //   path: PATH_NAME.HOME,
       //   element: (
