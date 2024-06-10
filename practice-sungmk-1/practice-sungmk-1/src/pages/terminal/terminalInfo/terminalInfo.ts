@@ -1,12 +1,8 @@
-import React, {useEffect, useState} from 'react';
-// import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+// export interface TerminalInfo {
+//   [key: string]: string | null
+// }
 
-interface TerminalAsListProps {
-    terminalId?: string;
-}
-
-interface TerminalInfo
+export interface TerminalInfoTs
 {
     terminalId: string | null,
     terminalSn: string | null,
@@ -80,46 +76,76 @@ interface TerminalInfo
     resCode: string | null
 }
 
-const fetchTerminalInfo = async (terminalId: string): Promise<TerminalInfo> => {
-    const response = await axios.get<TerminalInfo>(`https://devapi.ubcn.co.kr:17881/vmms/terminals/${terminalId}`);
-    console.log("response.data==" + response.data.terminalId)
-    return response.data;
-};
 
-
-
-const TerminalAsList: React.FC<TerminalAsListProps> = ({ terminalId }) => {
-
-    const [TerminalInfo, setTerminalInfo] = useState<TerminalInfo | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                const data = await fetchTerminalInfo(terminalId || '');
-                setTerminalInfo(data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
-    }, [terminalId]);
-
-    if (loading) return <div>Loading...</div>;
-    if (!TerminalInfo) return null;
-
-    return (
-        <div>
-            <h3>Terminal Information</h3>
-            <p>ID: {TerminalInfo.code}</p>
-            <p>Name: {TerminalInfo.merchantName}</p>
-            {/* 필요한 데이터를 여기에 추가합니다. */}
-        </div>
-    );
-
-};
-
-export default TerminalAsList;
+// export interface TerminalInfo {
+//     terminalId:string,
+//     terminalSn:string,
+//     terminalVer:string,
+//     merchantName:string,
+//     presentName:string,
+//     tel:string,
+//     address:string,
+//     addressDetail:string,
+//     businessNo:string,
+//     bizType:string,
+//     presentRegNo:string,
+//     merchantType:string,
+//     connectCode:string,
+//     securityLevel:string,
+//     groupCode:string,
+//     saleType:string,
+//     dnsFlag:string,
+//     stateFlag:string,
+//     useFlag:string,
+//     enableServiceList:string,
+//     lastDnLdDate:string,
+//     lastDnLdTime:string,
+//     lastAdjustReqDate:string,
+//     temp:string,
+//     categoryCode:string,
+//     agentCode:string,
+//     vanTerminalId:string,
+//     orgTerminalId1:string,
+//     orgTerminalId2:string,
+//     orgTerminalId3:string,
+//     pgMerchNbr:string,
+//     vanCode:string,
+//     procId:string,
+//     afterData:string,
+//     newTerminalId:string,
+//     code:string,
+//     organizationPath:string,
+//     model:string,
+//     modem:string,
+//     modemSN:string,
+//     modemInfo:string,
+//     place:string,
+//     transactionNo:string,
+//     isSoldOut:string,
+//     isControlError:string,
+//     isPdError:string,
+//     isEmptyCol:string,
+//     company:string,
+//     userName:string,
+//     userId:string,
+//     aspCharge:string,
+//     placeCode:string,
+//     placeNo:string,
+//     accessStatus:string,
+//     organ:string,
+//     controlError:string,
+//     pdError:string,
+//     isExpire:string,
+//     emptyCol:string,
+//     soldOut:string,
+//     tranDate:string,
+//     tranDate2:string,
+//     finalTranDate:string,
+//     isTradeIn:string,
+//     csMemo:string,
+//     memo:string,
+//     tmsFlag:string,
+//     cardId:string,
+//     responseDate:string,
+//     resCode: string
+// }

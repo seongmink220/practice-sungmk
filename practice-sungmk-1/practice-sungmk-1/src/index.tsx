@@ -5,6 +5,7 @@ import App from "./App";
 // import GlobalStyle from "./@styles/GlobalStyle";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { BrowserRouter } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 // if (process.env.NODE_ENV === "development") {
 //     // eslint-disable-next-line @typescript-eslint/no-var-requires
 //     const { worker } = require("./mocks/browser");
@@ -26,7 +27,9 @@ root.render(
         <QueryClientProvider client={queryClient}>
             {/*<ThemeProvider theme={LIGHT_MODE_THEME}>*/}
             {/*    <GlobalStyle />*/}
+            <RecoilRoot>
                 <App />
+            </RecoilRoot>
             {/*</ThemeProvider>*/}
         </QueryClientProvider>
     </BrowserRouter>

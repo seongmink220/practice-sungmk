@@ -10,13 +10,14 @@
 import LayoutContainer from "../src/components/layouts/LayoutContainer";
 import Terminal from "../src/pages/terminal/index";
 import {PATH_NAME} from "../src/@constants/path";
+import Home from "../src/pages/home";
 
 const routes = [
       {
         path: "",
         element: (
             <LayoutContainer>
-              {/*<Manual/>*/}
+              <Home />
             </LayoutContainer>
         ),
       },
