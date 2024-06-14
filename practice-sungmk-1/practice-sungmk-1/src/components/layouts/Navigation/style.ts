@@ -2,7 +2,10 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+    padding: 10px 5px;
+    margin: 5px;
+`;
 
 export const WrapperLink = styled(Link)`
     margin-right: 10px;
@@ -10,7 +13,11 @@ export const WrapperLink = styled(Link)`
     color: inherit; /* 부모 요소의 글꼴 색상 상속 */
     border: 1px solid black;
     border-radius: 5px;
-    padding: 2px;
+    padding: 5px;
+    background-color: cadetblue;
+    color: white;
+    font-weight: bold;
+    border:none;
 `;
 
 // export const UsageContainer = styled.section`

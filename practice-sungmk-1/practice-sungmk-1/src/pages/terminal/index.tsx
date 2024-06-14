@@ -1,10 +1,8 @@
 import React, {useRef, useState} from 'react'
-import * as Styled from "../../../src/components/layouts/LayoutContainer/style";
-// import TerminalInfo from "../../../src/pages/terminal/terminalInfo";
-import TerminalAsList from "../../../src/pages/terminal/terminalAsList";
+import * as Styled from "./style"
+import TerminalInfoList from "../../../src/pages/terminal/terminalInfo";
 import TerminalStateList from "../../../src/pages/terminal/terminalState";
-// import {useRecoilState} from "recoil";
-// import { isSearchedState } from './terminalAsList/terminalAsListAtom';
+
 
 function Terminal() {
 
@@ -14,10 +12,9 @@ function Terminal() {
     // 검색 버튼 클릭시 플래그를 저장할 상태
     const [isSearched, setIsSearched] = useState<boolean>(false);
 
-    // 입력값이 변경될 때마다 호출되는 함수
-    // const handleInputChange = (e : React.ChangeEvent<HTMLInputElement>) => {
-    //     setSearchValue(e.target.value);
-    // };
+    const [selectTab, setSelectTab] = useState('');
+
+
 
     // input 요소에 접근하기 위한 ref 생성
     const inputRef = useRef<HTMLInputElement>(null);
@@ -31,18 +28,27 @@ function Terminal() {
 
             // 검색값 출력
             console.log('검색 값:', searchValue);
+            setSelectTab('terminalInfo');
         }
         // 플래그를 true로 변경
         setIsSearched(true);
     };
 
     const terminalMenu = () => {
-        if(isSearched){
-            // return <TerminalAsList key={searchValue} terminalId={searchValue}/>
-            return <TerminalStateList key={searchValue} terminalId={searchValue}/>
 
+        switch (selectTab){
+            case 'terminalInfo':
+                return <TerminalInfoList key={searchValue} terminalId={searchValue}/>
+            case 'terminalState':
+                return <TerminalStateList key={searchValue} terminalId={searchValue}/>
+            case 'terminalAsList':
+                return null;
+            case 'cardMerchInfo':
+                return null;
+            default:
+                return null;
         }
-        return null;
+
     }
 
     return (
@@ -58,10 +64,25 @@ function Terminal() {
                         placeholder="검색어를 입력하세요"
                         ref={inputRef}
                     />
-                    {/* 검색 버튼 */}
                     <button onClick={handleSearch}>검색</button>
                 </div>
 
+                <Styled.termianlNav>
+                    <Styled.terminalUl>
+                        <Styled.terminalLi>
+                            <Styled.terminalStrong onClick={() => setSelectTab('terminalInfo')}>TerminalInfo</Styled.terminalStrong>
+                        </Styled.terminalLi>
+                        <Styled.terminalLi>
+                            <Styled.terminalStrong onClick={() => setSelectTab('terminalState')}>TerminalState</Styled.terminalStrong>
+                        </Styled.terminalLi>
+                        <Styled.terminalLi>
+                            <Styled.terminalStrong onClick={() => setSelectTab('terminalAsList')}>terminalAsList</Styled.terminalStrong>
+                        </Styled.terminalLi>
+                        <Styled.terminalLi>
+                            <Styled.terminalStrong onClick={() => setSelectTab('cardMerchInfo')}>cardMerchInfo</Styled.terminalStrong>
+                        </Styled.terminalLi>
+                    </Styled.terminalUl>
+                </Styled.termianlNav>
                 {terminalMenu()}
 
             </section>
@@ -70,3 +91,10 @@ function Terminal() {
 }
 
 export default Terminal;
+
+
+
+// 입력값이 변경될 때마다 호출되는 함수
+// const handleInputChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+//     setSearchValue(e.target.value);
+// };

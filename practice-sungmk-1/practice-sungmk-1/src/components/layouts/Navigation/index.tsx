@@ -1,5 +1,4 @@
 import * as Styled from "./style";
-// import { useState, useEffect } from "react";
 import { PATH_NAME } from "../../../../src/@constants/path";
 // import MenuIcon from "@public/assets/icons/MenuIcon.svg";
 // import StarIconUnfill from "@public/assets/icons/StarIcon-Unfill.svg";
@@ -11,7 +10,6 @@ import { PATH_NAME } from "../../../../src/@constants/path";
 // import Drawer from "@src/components/Drawer";
 import {Link} from "react-router-dom";
 import React from "react";
-import {WrapperLink} from "./style";
 
 function Navigation() {
   // const [isMenuDrawerOpened, setIsMenuDrawerOpened] = useState(false);
@@ -33,13 +31,11 @@ function Navigation() {
   // }, [isMenuDrawerOpened]);
 
   return (
-      <div>
-          <hr/>
-          <WrapperLink to={PATH_NAME.TERMINAL}>Terminal</WrapperLink>
-          <WrapperLink to={PATH_NAME.TERMINAL}>Test</WrapperLink>
-          <WrapperLink to={PATH_NAME.HOME}>난 Navigation 이다.</WrapperLink>
-          <hr/>
-      </div>
+      <Styled.Container>
+          <Styled.WrapperLink to={PATH_NAME.TERMINAL}>Terminal</Styled.WrapperLink>
+          <Styled.WrapperLink to={PATH_NAME.TERMINAL}>Test</Styled.WrapperLink>
+          <Styled.WrapperLink to={PATH_NAME.HOME}>난 Navigation 이다.</Styled.WrapperLink>
+      </Styled.Container>
       // <Styled.Container>
     //   <WrapperButton kind="bigIcon" onClick={handleToggleDrawer}>
     //     <MenuIcon width="24px" height="24px" fill="#121212" />

@@ -1,92 +1,19 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
+import {TerminalState} from './TerminalState'
 
 interface TerminalAsListProps {
     terminalId?: string;
 }
 
-export interface TerminalState {
-    terminalId: string,
-    terminalSn: string,
-    terminalVer: string,
-    merchantName: string,
-    presentName: string,
-    tel: string,
-    address: string,
-    addressDetail: string,
-    businessNo: string,
-    bizType: string,
-    presentRegNo: string,
-    merchantType: string,
-    connectCode: string,
-    securityLevel: string,
-    groupCode: string,
-    saleType: string,
-    dnsFlag: string,
-    stateFlag: string,
-    useFlag: string,
-    enableServiceList: string,
-    lastDnLdDate: string,
-    lastDnLdTime: string,
-    lastAdjustReqDate: string,
-    temp: string,
-    categoryCode: string,
-    agentCode: string,
-    vanTerminalId: string,
-    orgTerminalId1: string,
-    orgTerminalId2: string,
-    orgTerminalId3: string,
-    pgMerchNbr: string,
-    vanCode: string,
-    procId: string,
-    afterData: string,
-    newTerminalId: string,
-    code: string,
-    organizationPath: string,
-    model: string,
-    modem: string,
-    modemSN: string,
-    modemInfo: string,
-    place: string,
-    transactionNo: string,
-    isSoldOut: string,
-    isControlError: string,
-    isPdError: string,
-    isEmptyCol: string,
-    company: string,
-    userName: string,
-    userId: string,
-    aspCharge: string,
-    placeCode: string,
-    placeNo: string,
-    accessStatus: string,
-    organ: string,
-    controlError: string,
-    pdError: string,
-    isExpire: string,
-    emptyCol: string,
-    soldOut: string,
-    tranDate: string,
-    tranDate2: string,
-    finalTranDate: string,
-    isTradeIn: string,
-    csMemo: string,
-    memo: string,
-    tmsFlag: string,
-    cardId: string,
-    responseDate: string,
-    resCode: string
-}
-
-const fetchTerminalState = async (terminalId: string): Promise<TerminalState> => {
-    const response = await axios.get<TerminalState>(`https://devapi.ubcn.co.kr:17881/vmms/terminals/${terminalId}/status`);
+const fetchTerminalState = async (terminalId: string): Promise<TerminalState[]> => {
+    const response = await axios.get<TerminalState[]>(`https://devapi.ubcn.co.kr:17881/vmms/terminals/${terminalId}/status`);
     console.log("response.data==" + response.data)
     return response.data;
 };
 
-const TerminalStateList : React.FC<TerminalAsListProps> = ({ terminalId }) => {
-
-    const [TerminalState, setTerminalState] = useState<TerminalState[]>([]);
+const TerminalStateList: React.FC<TerminalAsListProps> = ({ terminalId }) => {
+    const [terminalStates, setTerminalStates] = useState<TerminalState[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
@@ -94,11 +21,9 @@ const TerminalStateList : React.FC<TerminalAsListProps> = ({ terminalId }) => {
             setLoading(true);
             try {
                 const data = await fetchTerminalState(terminalId || '');
-                setTerminalState([data]);
-                console.log("TerminalState==" + TerminalState[0]);
-                // console.log("TerminalState[0]==" + TerminalState);
+                setTerminalStates(data);
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('terminalInfo fetching data:', error);
             } finally {
                 setLoading(false);
             }
@@ -107,24 +32,24 @@ const TerminalStateList : React.FC<TerminalAsListProps> = ({ terminalId }) => {
     }, [terminalId]);
 
     if (loading) return <div>Loading...</div>;
-    if (TerminalState.length === 0) return <div>No data available</div>;
+    if (terminalStates.length === 0) return <div>No data available</div>;
 
     return (
         <div>
             <h3>Terminal Status</h3>
-            <table>
-                <thead>
+            <table style={{ border: '1px solid black', borderCollapse: 'collapse', width: '100%', textAlign : 'center'}}>
+                <thead style={{ border: '1px solid black', borderCollapse: 'collapse', width: '100%' }}>
                 <tr>
-                    <th>Terminal ID</th>
+                    <th >Terminal ID</th>
                     <th>Terminal SN</th>
                     {/* 다른 필요한 헤더 항목들 */}
                 </tr>
                 </thead>
                 <tbody>
-                {TerminalState.map((terminal, index) => (
-                    <tr key={index}>
-                        <td>{terminal.terminalId}</td>
-                        <td>{terminal.terminalSn}</td>
+                {terminalStates.map((terminal, index) => (
+                    <tr key={index} style={{ border: '1px solid black', borderCollapse: 'collapse', width: '100%' }}>
+                        <td>{terminal.pdError}</td>
+                        <td>{terminal.soldOut}</td>
                         {/* 필요한 다른 데이터 출력 */}
                     </tr>
                 ))}

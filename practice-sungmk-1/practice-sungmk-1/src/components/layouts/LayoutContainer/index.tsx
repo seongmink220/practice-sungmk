@@ -3,7 +3,7 @@ import Footer from "../../../../src/components/layouts/Footer";
 import * as Styled from "./style";
 import Navigation from "../Navigation";
 import {Link, useLocation} from "react-router-dom";
-import {StrictPropsWithChildren} from "../../../../src/@types/utils";
+import {StrictPropsWithChildren} from "@src/@types/utils";
 import routes from '../../../Routes';
 import {PATH_NAME} from "../../../../src/@constants/path";
 

@@ -25,5 +25,5 @@
       "@public/*": ["public/*"]
     }
   },
-  "include": ["src", "public", "src/@types/custom.d.ts"]
+  "include": ["src/**/*"]
 }

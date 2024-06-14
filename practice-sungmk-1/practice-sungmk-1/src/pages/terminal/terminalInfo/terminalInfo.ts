@@ -1,9 +1,4 @@
-// export interface TerminalInfo {
-//   [key: string]: string | null
-// }
-
-export interface TerminalInfoTs
-{
+export interface TerminalInfo {
     terminalId: string | null,
     terminalSn: string | null,
     terminalVer: string | null,
